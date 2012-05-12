@@ -59,7 +59,8 @@ var filmlist = new Array();
 function mapa(filmlist){
 
 		  var myOptions = {
-	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,streetViewControl: false,styles: mapStyles
+	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP, mapTypeControl: false,
+			 streetViewControl: false,styles: mapStyles
 	        };
 	        map = new google.maps.Map(document.getElementById('map_canvas'),
 	            myOptions);
