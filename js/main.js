@@ -41,7 +41,7 @@ var filmlist = new Array();
 	                elementType: "geometry",
 	                stylers: [
 	                  { visibility: "simplified" },
-	                  { lightness: 80 }
+	                  { lightness: 40 }
 	                ]
 	              },{
 	                featureType: "transit.line",
@@ -59,7 +59,7 @@ var filmlist = new Array();
 function mapa(filmlist){
 
 		  var myOptions = {
-	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,streetViewControl: false,styles: mapStyles
+	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,streetViewControl: false,disableDefaultUI: true,styles: mapStyles
 	        };
 	        map = new google.maps.Map(document.getElementById('map_canvas'),
 	            myOptions);
