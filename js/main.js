@@ -5,10 +5,11 @@ var filmlist = new Array();
 				var num = data.hits.hits[i]._source["Número"];
 				num = Math.round(num);				
 				filmdire = data.hits.hits[i]._source["Calle de Locación"] + " " + num + ", Ciudad Autónoma de Buenos Aires, Argentina";
+				filmdirest = data.hits.hits[i]._source["Calle de Locación"] + " " + num;
 				filmtit = data.hits.hits[i]._source["Título del Proyecto"];
 				filmtip = data.hits.hits[i]._source["Tipo de Producción"];
 				console.log(data.hits.hits[i]._source["Calle de Locación"]);
-				filmlist[i] = [filmdire, filmtit, filmtip];
+				filmlist[i] = [filmdire, filmtit, filmtip, filmdirest];
 		}	
 						mapa(filmlist);	
 		});
@@ -59,7 +60,7 @@ var filmlist = new Array();
 function mapa(filmlist){
 
 		  var myOptions = {
-	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,disableDefaultUI: true,
+	         zoom:11,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,disableDefaultUI: true,
 		    styles: mapStyles
 	        };
 	        map = new google.maps.Map(document.getElementById('map_canvas'),
@@ -98,20 +99,20 @@ function mapa(filmlist){
 	
 	
 	for(i=0; i < filmlist.length; i++){
-		geocodeit(map, filmlist[i][0], filmlist[i][1], filmlist[i][2]);
+		geocodeit(map, filmlist[i][0], filmlist[i][1], filmlist[i][2], filmlist[i][3]);
 	}
 }
-function geocodeit(map, dire, film, tipo){
+function geocodeit(map, dire, film, tipo, filmdire){
 	var geoOptions = {
       address: dire,
       region: "NO"
     };
-		geocoder.geocode(geoOptions, geoCallback(map, film, tipo));
+		geocoder.geocode(geoOptions, geoCallback(map, film, tipo, filmdire));
 }
-function geoCallback(map, film, tipo) {
+function geoCallback(map, film, tipo, filmdire) {
    return function(results, status) {
      if (status == google.maps.GeocoderStatus.OK) {
-       addMarker(map, film, tipo, results[0].geometry.location);	
+       addMarker(map, film, tipo, filmdire,  results[0].geometry.location);	
 		if(film==1){ // si hay una sola idea posicionar el mapa en esa idea
 			map.setCenter(results[0].geometry.location);
 		}
@@ -120,12 +121,15 @@ function geoCallback(map, film, tipo) {
      }
    };
  }
-function addMarker(map, film, tipo, location) {
-  var marker = new google.maps.Marker({ map : map, position : location, title: film});
+function addMarker(map, film, tipo, filmdire, location) {
+	var image = 'assets/iconos/icono_32.png';
+  
+  var marker = new google.maps.Marker({ map : map, position : location, title: film, icon: image });
   var infowindow = new google.maps.InfoWindow( {
     content : film
   });
   new google.maps.event.addListener(marker, "click", function() {
-	$('.data').empty().html(film+"<br /><small>"+tipo+"</small>");
+	$('.data').empty().html("<p>"+film+"<br /><small>"+filmdire+" - "+tipo+"</small></p>");
+
   });
 }
