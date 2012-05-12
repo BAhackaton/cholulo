@@ -4,9 +4,10 @@ var filmlist = new Array();
 			for(i = 0; i < data.hits.hits.length; i++){
 				var num = data.hits.hits[i]._source["N煤mero"];
 				num = Math.round(num);				
-				filmdire = data.hits.hits[i]._source["Calle de Locaci髇"] + " " + num + ", Ciudad Aut梟oma de Buenos Aires, Argentina";
-				filmtit = data.hits.hits[i]._source["T抰ulo del Proyecto"];
-				filmtip = data.hits.hits[i]._source["Tipo de Producci髇"];				
+				filmdire = data.hits.hits[i]._source["Calle de Locaci贸n"] + " " + num + ", Ciudad Aut贸noma de Buenos Aires, Argentina";
+				filmtit = data.hits.hits[i]._source["T铆tulo del Proyecto"];
+				filmtip = data.hits.hits[i]._source["Tipo de Producci贸n"];
+				console.log(data.hits.hits[i]._source["Calle de Locaci贸n"]);
 				filmlist[i] = [filmdire, filmtit, filmtip];
 		}	
 						mapa(filmlist);	
