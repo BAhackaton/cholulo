@@ -2,12 +2,12 @@ var filmlist = new Array();
 	$(document).bind("pageinit", function(){
 		$.getJSON('http://elastic.restopengov.org/gcba/set-filmaciones/_search?q=Fecha%20de%20Rodaje:11/01/2011&size=10', function(data){
 			for(i = 0; i < data.hits.hits.length; i++){
-				var num = data.hits.hits[i]._source["N渕ero"];
+				var num = data.hits.hits[i]._source["N煤mero"];
 				num = Math.round(num);				
-				filmdire = data.hits.hits[i]._source["Calle de Locaci梟"] + " " + num + ", Ciudad Aut梟oma de Buenos Aires, Argentina";
-				filmtit = data.hits.hits[i]._source["T抰ulo del Proyecto"];
-				filmtip = data.hits.hits[i]._source["Tipo de Producci梟"];
-				
+				filmdire = data.hits.hits[i]._source["Calle de Locaci贸n"] + " " + num + ", Ciudad Aut贸noma de Buenos Aires, Argentina";
+				filmtit = data.hits.hits[i]._source["T铆tulo del Proyecto"];
+				filmtip = data.hits.hits[i]._source["Tipo de Producci贸n"];
+				console.log(data.hits.hits[i]._source["Calle de Locaci贸n"]);
 				filmlist[i] = [filmdire, filmtit, filmtip];
 		}	
 						mapa(filmlist);	
@@ -41,7 +41,7 @@ var filmlist = new Array();
 	                elementType: "geometry",
 	                stylers: [
 	                  { visibility: "simplified" },
-	                  { lightness: 80 }
+	                  { lightness: 40 }
 	                ]
 	              },{
 	                featureType: "transit.line",
@@ -59,7 +59,8 @@ var filmlist = new Array();
 function mapa(filmlist){
 
 		  var myOptions = {
-	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,streetViewControl: false,styles: mapStyles
+	         zoom:12,minZoom: 9,center:baires,mapTypeId:google.maps.MapTypeId.ROADMAP,disableDefaultUI: true,
+		    styles: mapStyles
 	        };
 	        map = new google.maps.Map(document.getElementById('map_canvas'),
 	            myOptions);

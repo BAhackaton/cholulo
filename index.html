@@ -17,6 +17,8 @@
 
 <style type="text/css">
 
+
+
 #map_canvas.fluid {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
@@ -25,10 +27,31 @@ box-sizing: border-box;
 height: 100%;
 left: 0;
 position: absolute;
-top: 5%;
 width: 100%;
+top: 60px;
 z-index: 0;
+overflow: hidden; 
 }
+#header {
+	background: #FF0000;
+	border: 0px;
+}
+
+#header .brand {
+	display: block;
+	width: 100%;
+	height: 49px;
+	text-indent: -5000px;
+	background: url(assets/logo.png) no-repeat;
+	text-align: left;
+	margin: 5px;
+	
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+	margin: 0px;
+}
+
 #footer, #header{
 	width: 100%;
 	position: absolute;
@@ -38,13 +61,15 @@ z-index: 0;
 #footer{
 	bottom: 0;
 }
+
+
 </style>
 </head>
 
 <body>
 	
 <div id="header" data-role="header">
-	<h1>Cholulo App</h1>
+	<h1 class="brand">Cholulo</h1>
 </div>
 <div  data-role="content"  id="map_canvas" class="fluid"></div>
 <div data-role="footer" id="footer" class="data">
